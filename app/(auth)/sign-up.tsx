@@ -9,6 +9,8 @@ import OAuth from "@/components/OAuth";
 import { useSignUp } from "@clerk/clerk-expo";
 import { ReactNativeModal } from "react-native-modal";
 
+// Todo : make sure all feedback are returned
+// Todo : Create different Test cases
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
 
@@ -205,7 +207,10 @@ const SignUp = () => {
 
             <CustomButton
               title="Browse Home"
-              onPress={() => router.replace("/(root)/(tabs)/home")}
+              onPress={() => {
+                setShowSuccessModal(false);
+                router.push("/(root)/(tabs)/home");
+              }}
               className="mt-5"
             />
           </View>
