@@ -7,7 +7,6 @@ const Home = () => {
   const { user } = useUser();
   return (
     <SafeAreaView>
-      {/*<Text>Home </Text>*/}
       <SignedIn>
         <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
       </SignedIn>
