@@ -15,6 +15,7 @@ import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants";
 import React from "react";
 import GoogleTextInput from "@/components/GoogleTextInput";
+import Map from "@/components/Map";
 
 const recentRides = mock_rides;
 
@@ -67,7 +68,7 @@ const Home = () => {
         ListHeaderComponent={() => (
           <>
             <View className="flex flex-row items-center justify-between my-5">
-              <Text className="text-xl text-2xl font-JakartaExtraBold capitalize">
+              <Text className=" text-2xl font-JakartaExtraBold capitalize">
                 Welcome {" , "}
                 {user?.firstName ||
                   user?.emailAddresses[0].emailAddress.split("@")[0]}
@@ -91,9 +92,13 @@ const Home = () => {
                 Your Current Location
               </Text>
               <View className="flex flex-row items-center bg-transparent h-[300px]">
-                {/*map compent*/}
+                <Map />
               </View>
             </>
+
+            <Text className="text-xl font-JakartaBold mt-5 mb-3">
+              Recent Rides
+            </Text>
           </>
         )}
       />
