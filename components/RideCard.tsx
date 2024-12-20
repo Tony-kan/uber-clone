@@ -11,6 +11,7 @@ const RideCard = ({
     destination_address,
     created_at,
     ride_time,
+    fare_price,
     driver,
     payment_status,
   },
