@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useUser, useClerk } from "@clerk/clerk-expo";
 
 import mock_rides from "../../../MockData/mock_rides.json";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import * as Linking from "expo-linking";
 import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants";
@@ -69,7 +69,15 @@ const Home = () => {
     }
   };
 
-  const handleDestinationPress = () => {};
+  const handleDestinationPress = (location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  }) => {
+    setDestinationLocation(location);
+
+    router.push("/(root)/find-ride");
+  };
 
   return (
     <SafeAreaView>
