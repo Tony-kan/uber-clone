@@ -14,7 +14,7 @@ const BookRide = () => {
   const driverDetails = drivers?.filter(
     (driver) => +driver.id === selectedDriver,
   )[0];
-
+  console.log("destination address", destinationAddress);
   return (
     <RideLayout title="Book Ride" snapPoints={["65%", "85%"]}>
       <Text className="text-xl font-JakartaSemiBold mb-3">
