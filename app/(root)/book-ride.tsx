@@ -1,6 +1,11 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
+import RideLayout from "@/components/RideLayout";
 
 const BookRide = () => {
-  return <View>BookRide</View>;
+  return (
+    <RideLayout title="Book Ride" snapPoints={["65%", "85%"]}>
+      <Text>BookRide</Text>
+    </RideLayout>
+  );
 };
 export default BookRide;
