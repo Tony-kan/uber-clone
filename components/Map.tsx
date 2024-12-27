@@ -1,16 +1,22 @@
 import react, { useEffect, useState } from "react";
 
-import { View, Text } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import MapView, { Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import { useDriverStore, useLocationStore } from "@/store";
-import { calculateRegion, generateMarkersFromData } from "@/lib/map";
+import {
+  calculateDriverTimes,
+  calculateRegion,
+  generateMarkersFromData,
+} from "@/lib/map";
 import mock_drivers from "../MockData/mock_drivers.json";
-import { MarkerData } from "@/types/type";
+import { Driver, MarkerData } from "@/types/type";
 import { icons } from "@/constants";
+import { useFetch } from "@/lib/fetch";
 
 const drivers = mock_drivers;
 
 const Map = () => {
+  const { data: drivers, loading, error } = useFetch<Driver[]>("/(api)/driver");
   const {
     userLongitude,
     userLatitude,
@@ -19,7 +25,7 @@ const Map = () => {
   } = useLocationStore();
 
   const { selectedDriver, setDrivers } = useDriverStore();
-  const [markers, setMarkers] = useState<MarkerData[]>();
+  const [markers, setMarkers] = useState<MarkerData[]>([]);
 
   const region = calculateRegion({
     userLongitude,
@@ -29,9 +35,6 @@ const Map = () => {
   });
 
   useEffect(() => {
-    //Todo : Remove
-    setDrivers(drivers);
-
     if (Array.isArray(drivers)) {
       if (!userLatitude || !userLongitude) return;
 
@@ -43,8 +46,40 @@ const Map = () => {
 
       setMarkers(newMarkers);
     }
-  }, [drivers]);
+  }, [drivers, userLongitude, userLatitude]);
 
+  useEffect(() => {
+    if (
+      markers?.length > 0 &&
+      destinationLatitude !== undefined &&
+      destinationLongitude !== undefined
+    ) {
+      calculateDriverTimes({
+        markers,
+        userLatitude,
+        userLongitude,
+        destinationLatitude,
+        destinationLongitude,
+      }).then((drivers) => {
+        setDrivers(drivers as MarkerData[]);
+      });
+    }
+  }, [markers, destinationLongitude, destinationLatitude]);
+  if (loading || !userLatitude || !userLongitude) {
+    return (
+      <View className="flex  justify-between items-center w-full">
+        <ActivityIndicator size="small" color="#000" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View className="flex  justify-between items-center w-full">
+        <Text>Error : {error}</Text>
+      </View>
+    );
+  }
   return (
     <MapView
       provider={PROVIDER_DEFAULT}
