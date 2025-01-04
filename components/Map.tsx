@@ -12,6 +12,7 @@ import mock_drivers from "../MockData/mock_drivers.json";
 import { Driver, MarkerData } from "@/types/type";
 import { icons } from "@/constants";
 import { useFetch } from "@/lib/fetch";
+import MapViewDirections from "react-native-maps-directions";
 
 const drivers = mock_drivers;
 
@@ -107,6 +108,33 @@ const Map = () => {
           }
         />
       ))}
+      {destinationLatitude && destinationLongitude && (
+        <>
+          <Marker
+            key="destination"
+            coordinate={{
+              latitude: destinationLatitude,
+              longitude: destinationLongitude,
+            }}
+            title="Destination"
+            image={icons.pin}
+          />
+
+          <MapViewDirections
+            origin={{
+              latitude: userLatitude,
+              longitude: userLongitude,
+            }}
+            destination={{
+              latitude: destinationLatitude,
+              longitude: destinationLongitude,
+            }}
+            apikey={process.env.EXPO_PUBLIC_GOOGLE_API_KEY}
+            strokeColor="#0286ff"
+            strokeWidth={3}
+          />
+        </>
+      )}
     </MapView>
   );
 };
