@@ -19,13 +19,15 @@ import React, { useEffect, useState } from "react";
 import GoogleTextInput from "@/components/GoogleTextInput";
 import Map from "@/components/Map";
 import { useLocationStore } from "@/store";
+import { useFetch } from "@/lib/fetch";
 
-const recentRides = mock_rides;
+// const recentRides = mock_rides;
 
 const Home = () => {
   const { user } = useUser();
   const { signOut } = useClerk();
-  const loading = false;
+  // const loading = false;
+  const {data:recentRides,loading} = useFetch(`/(api)/ride/${user?.id}`);
 
   const { setUserLocation, setDestinationLocation } = useLocationStore();
   const [hasPermissions, setHasPermissions] = useState(false);
@@ -61,7 +63,8 @@ const Home = () => {
     try {
       await signOut();
       // Redirect to your desired page
-      Linking.openURL(Linking.createURL("/(auth)/sign-in"));
+      // Linking.openURL(Linking.createURL("/(auth)/sign-in"));
+      router.replace("/(auth)/sign-in");
     } catch (err) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
@@ -78,7 +81,7 @@ const Home = () => {
 
     router.push("/(root)/find-ride");
   };
-
+console.log("recent rides",recentRides);
   return (
     <SafeAreaView>
       <FlatList

@@ -6,7 +6,6 @@ import { router } from "expo-router";
 import Map from "@/components/Map";
 import { useRef } from "react";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import { snapPoint } from "@gorhom/bottom-sheet/lib/typescript/utilities/snapPoint";
 
 const RideLayout = ({
   title,
