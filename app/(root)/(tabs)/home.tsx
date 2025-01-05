@@ -20,6 +20,7 @@ import GoogleTextInput from "@/components/GoogleTextInput";
 import Map from "@/components/Map";
 import { useLocationStore } from "@/store";
 import { useFetch } from "@/lib/fetch";
+import { Ride } from "@/types/type";
 
 // const recentRides = mock_rides;
 
@@ -27,7 +28,9 @@ const Home = () => {
   const { user } = useUser();
   const { signOut } = useClerk();
   // const loading = false;
-  const {data:recentRides,loading} = useFetch(`/(api)/ride/${user?.id}`);
+  const { data: recentRides, loading } = useFetch<Ride[]>(
+    `/(api)/ride/${user?.id}`
+  );
 
   const { setUserLocation, setDestinationLocation } = useLocationStore();
   const [hasPermissions, setHasPermissions] = useState(false);
@@ -57,7 +60,7 @@ const Home = () => {
       });
     };
     requestLocation();
-  }, []);
+  }, [setUserLocation]);
 
   const handleSignOut = async () => {
     try {
@@ -81,11 +84,11 @@ const Home = () => {
 
     router.push("/(root)/find-ride");
   };
-console.log("recent rides",recentRides);
+  // console.log("recent rides",recentRides);
   return (
     <SafeAreaView>
       <FlatList
-        data={recentRides?.slice(0, 5)}
+        data={recentRides ? recentRides.slice(0, 5) : []}
         renderItem={({ item }) => <RideCard ride={item} />}
         className="px-5"
         keyboardShouldPersistTaps="handled"
