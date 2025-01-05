@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Alert, Image, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import CustomButton from "@/components/CustomButton";
 import { icons } from "@/constants";
 import { useOAuth } from "@clerk/clerk-expo";

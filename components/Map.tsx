@@ -8,13 +8,14 @@ import {
   calculateRegion,
   generateMarkersFromData,
 } from "@/lib/map";
-import mock_drivers from "../MockData/mock_drivers.json";
+// import mock_drivers from "../MockData/mock_drivers.json";
 import { Driver, MarkerData } from "@/types/type";
 import { icons } from "@/constants";
 import { useFetch } from "@/lib/fetch";
 import MapViewDirections from "react-native-maps-directions";
+import React from "react";
 
-const drivers = mock_drivers;
+// const drivers = mock_drivers;
 
 const Map = () => {
   const { data: drivers, loading, error } = useFetch<Driver[]>("/(api)/driver");

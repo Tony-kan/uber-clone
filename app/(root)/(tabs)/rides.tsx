@@ -1,17 +1,14 @@
 import RideCard from "@/components/RideCard";
-import { icons, images } from "@/constants";
+import { images } from "@/constants";
 import { View, Text, FlatList, ActivityIndicator, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-// import Map from "@/components/Map";
-import { useClerk, useUser } from "@clerk/clerk-expo";
+import { useUser } from "@clerk/clerk-expo";
 import { useFetch } from "@/lib/fetch";
 import { Ride } from "@/types/type";
 import React from "react";
 
 const Rides = () => {
   const { user } = useUser();
-  // const { signOut } = useClerk();
-  // const loading = false;
   const { data: recentRides, loading } = useFetch<Ride[]>(
     `/(api)/ride/${user?.id}`
   );

@@ -1,4 +1,3 @@
-// import "../../global.css";
 import { Stack } from "expo-router";
 
 export default function Layout() {
@@ -9,6 +8,5 @@ export default function Layout() {
       <Stack.Screen name="confirm-ride" options={{ headerShown: false }} />
       <Stack.Screen name="book-ride" options={{ headerShown: false }} />
     </Stack>
-    // <StatusBar style="auto" />
   );
 }

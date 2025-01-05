@@ -1,5 +1,3 @@
-// import "../../global.css";
-
 import { Stack } from "expo-router";
 
 export default function Layout() {
@@ -9,6 +7,5 @@ export default function Layout() {
       <Stack.Screen name="sign-up" options={{ headerShown: false }} />
       <Stack.Screen name="sign-in" options={{ headerShown: false }} />
     </Stack>
-    // <StatusBar style="auto" />
   );
 }

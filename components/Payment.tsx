@@ -9,7 +9,6 @@ import { useAuth } from "@clerk/clerk-expo";
 import { ReactNativeModal } from "react-native-modal";
 import { images } from "@/constants";
 import { router } from "expo-router";
-import { className } from "postcss-selector-parser";
 
 const Payment = ({
   fullName,
@@ -20,9 +19,9 @@ const Payment = ({
 }: PaymentProps) => {
   const { userId } = useAuth();
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [publishableKey, setPublishableKey] = useState("");
+  // const [publishableKey, setPublishableKey] = useState("");
 
   const {
     userAddress,
@@ -44,7 +43,7 @@ const Payment = ({
         confirmHandler: async (
           paymentMethod,
           shouldSavePaymentMethod,
-          intentCreationCallback,
+          intentCreationCallback
         ) => {
           const { paymentIntent, customer } = await fetchAPI(
             "/(api)/(stripe)/create",
@@ -59,7 +58,7 @@ const Payment = ({
                 amount: amount,
                 paymentMethodId: paymentMethod.id,
               }),
-            },
+            }
           );
 
           if (paymentIntent.client_secret) {

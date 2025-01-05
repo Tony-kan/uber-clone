@@ -10,9 +10,8 @@ import * as Location from "expo-location";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useUser, useClerk } from "@clerk/clerk-expo";
 
-import mock_rides from "../../../MockData/mock_rides.json";
-import { Link, router } from "expo-router";
-import * as Linking from "expo-linking";
+// import mock_rides from "../../../MockData/mock_rides.json";
+import { router } from "expo-router";
 import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants";
 import React, { useEffect, useState } from "react";

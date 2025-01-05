@@ -1,6 +1,6 @@
 import { FlatList, View } from "react-native";
 import RideLayout from "@/components/RideLayout";
-import mock_drivers from "../../MockData/mock_drivers.json";
+// import mock_drivers from "../../MockData/mock_drivers.json";
 import DriverCard from "@/components/DriverCard";
 import CustomButton from "@/components/CustomButton";
 import { router } from "expo-router";

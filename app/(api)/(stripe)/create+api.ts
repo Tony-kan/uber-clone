@@ -3,14 +3,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { name, email, amount, currency } = body;
+  const { name, email, amount } = body;
 
   if (!name || !email || !amount) {
     return new Response(
       JSON.stringify({
         error: "Please  entera valid email address",
         status: 400,
-      }),
+      })
     );
   }
   let customer;
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   }
   const ephemeralKey = await stripe.ephemeralKeys.create(
     { customer: customer.id },
-    { apiVersion: "2024-12-18.acacia" },
+    { apiVersion: "2024-12-18.acacia" }
   );
   const paymentIntent = await stripe.paymentIntents.create({
     amount: parseInt(amount) * 100,
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       paymentIntent: paymentIntent.client_secret,
       ephemeralKey: ephemeralKey.secret,
       customer: customer.id,
-    }),
+    })
   );
 }
 
