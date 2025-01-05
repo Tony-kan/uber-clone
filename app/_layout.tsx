@@ -14,6 +14,7 @@ import "react-native-reanimated";
 import { ClerkProvider, ClerkLoaded } from "@clerk/clerk-expo";
 import { tokenCache } from "@/cache";
 import { Slot } from "expo-router";
+import { LogBox } from "react-native";
 
 // import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -22,6 +23,8 @@ const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+//Enabe the lines after fixing all issues and warning ready to deploy the app
+LogBox.ignoreLogs(["warning:..."]);
 export default function RootLayout() {
   // const colorScheme = useColorScheme();
   const [loaded] = useFonts({
@@ -36,7 +39,7 @@ export default function RootLayout() {
 
   if (!publishableKey) {
     throw new Error(
-      "Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env",
+      "Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env"
     );
   }
 

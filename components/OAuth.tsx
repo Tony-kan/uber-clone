@@ -13,17 +13,13 @@ const OAuth = () => {
     try {
       const result = await googleOAuth(startOAuthFlow);
 
-      if (result.code === "sessiion_exits") {
-        Alert.alert("Success", "Session Exists. Redirecting to home screen");
+      if (result.code === "sessiion_exits" || result.code === "success") {
         router.push("/(root)/(tabs)/home");
       }
-      Alert.alert(result.success ? "Success" : "Error", result.message);
     } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2));
     }
-  }, []);
+  }, [startOAuthFlow]);
   return (
     <View>
       <View className="flex flex-row justify-center items-center mt-4 gap-x-3">
